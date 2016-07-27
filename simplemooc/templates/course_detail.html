@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ course.name }}</h1>
+<p><strong>Identificador: </strong>{{ course.slug }}</p>
+<p><strong>Objetivo: </strong><i>{{ course.description }}</i></p>
+<p><strong>Programação: </strong>{{ course.program }}</p>
+<p><strong>Quantidade de Vagas: </strong>{{ course.qtd_available }}</p>
+<p><strong>Alunos Matriculados: </strong>{{ course.qtd_students }}</p>
+<p><strong>Início das inscrições: </strong>{{ course.begin_matric }}</p>
+<p><strong>Fim das inscrições: </strong>{{ course.end_matric }}</p>
+<p><strong>Início do curso: </strong>{{ course.begin_course }}</p>
+<p><strong>Fim do curso: </strong>{{ course.end_course }}</p>
+<p><strong>Professor: </strong>{{ course.teacher }}</p>
+<p><strong>Categoria: </strong>{{ course.category }}</p>
+<p><strong>Palavras-Chaves: </strong>{{ course.keywords }}</p>
+<h2>Módulos</h2>
+<p>{{ course.modules}}</p>
+<p><i>{{ course.modules.description}}</i></p>
+<p>{{ course.modules.material}}</p>
+<p>{{ course.modules.activities}}</p>
+
+{% endblock%}

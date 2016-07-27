@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Lista de Cursos por Categoria</h1>
+<p><strong>Categoria selecionada: </strong>{{ category }}</p>
+<p><strong>Cursos: </strong></p>
+{% for course in courses %}
+    <p>{{ course}}</p>
+{% endfor%}
+
+{% endblock%}

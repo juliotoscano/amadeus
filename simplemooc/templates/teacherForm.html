@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Cadastre um Professor</h2>
+ {% if success %}
+    <div class="alert alert-success">
+        Mensagem enviada com sucesso
+    </div>
+{% endif %}
+<form action=""  method="POST" accept-charset="utf-8">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" name="registermodule" value="Registrar">
+</form>
+{% endblock %}

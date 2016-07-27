@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Lista de Cursos</h1>
+{% for course in courses %}
+<h2><a href="{% url 'simplemooc:detail' course.slug %}">{{ course }}</a></h2>
+<p><i>{{ course.description|linebreaks  }}</i></p>
+<p><strong>Categoria: </strong><a href="{% url 'simplemooc:category' course.category.slug %}">{{ course.category}}</a><br>
+        <strong>Início: </strong>{{ course.begin_course }}<br>
+        <strong>Fim: </strong>{{ course.end_course }}
+</p>
+{% endfor %}
+
+{% endblock%}
