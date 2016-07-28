@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Simplemooc</h1>
-<p><a href="{% url "simplemooc:createCategory" %}">Cadastrar Categoria >></a></p>
-<p><a href="{% url "simplemooc:createModule" %}">Cadastrar Modulo >></a></p>
-<p><a href="{% url "simplemooc:createTeacher" %}">Cadastrar Professor >></a></p>
-<p><a href="{% url "simplemooc:createCourse" %}">Cadastrar Curso >></a></p>
+<div class="page-header">
+    <div class="jumbotron" align="center">
+        <h1>Simplemooc</h1>
+        <p>Entre com sua conta e aproveite para se cadastrar nos cursos disponíveis</p>
+        <p><a class="btn btn-lg btn-success" href="#" role="button">Entrar</a></p>
+    </div>
+</div>
 {% endblock%}

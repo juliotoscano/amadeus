@@ -1,13 +1,24 @@
 {% extends "base.html" %}
+
+
 {% block content %}
-<h1>Lista de Cursos</h1>
+<h3>Criar:</h3>
+<p>
+<a class="btn btn-default btn-sm" href="{% url "simplemooc:createCourse" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Curso</a>
+<a class="btn btn-default btn-sm" href="{% url "simplemooc:createCategory" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Categoria</a>
+<a class="btn btn-default btn-sm" href="{% url "simplemooc:createModule" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Módulo</a>
+<a class="btn btn-default btn-sm" href="{% url "simplemooc:createTeacher" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Professor</a>
+</p>
+<h2>Lista de Cursos</h2>
 {% for course in courses %}
-<h2><a href="{% url 'simplemooc:detail' course.slug %}">{{ course }}</a></h2>
+<h3><a href="{% url 'simplemooc:detail' course.slug %}">{{ course }}</a></h3>
 <p><i>{{ course.description|linebreaks  }}</i></p>
 <p><strong>Categoria: </strong><a href="{% url 'simplemooc:category' course.category.slug %}">{{ course.category}}</a><br>
         <strong>Início: </strong>{{ course.begin_course }}<br>
         <strong>Fim: </strong>{{ course.end_course }}
 </p>
-{% endfor %}
+<p><a href="{% url "simplemooc:createCourse" %}">Editar</a> | <a href="#">Remover</a></p>
 
+
+{% endfor %}
 {% endblock%}
