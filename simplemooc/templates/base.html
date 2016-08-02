@@ -38,6 +38,13 @@
             {% endfor %}
             <li><a href="{% url 'simplemooc:contact' %}">Contato</a></li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'logout' %}">Sair</a></li>
+              {% else %}
+              <li><a href="{% url 'login' %}">Entrar</a></li>
+              {% endif %}
+          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

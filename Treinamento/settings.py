@@ -1,3 +1,4 @@
+
 """
 Django settings for Treinamento project.
 
@@ -37,7 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rolepermissions',
+    # libs
+    'widget_tweaks',
+    #apps
+    'accounts',
     'simplemooc',
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -77,12 +85,14 @@ WSGI_APPLICATION = 'Treinamento.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'amadeus',
+        'USER': 'amadeus',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -128,3 +138,14 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(
                     os.path.dirname(BASE_DIR), "media_cdn"
                     )
+
+#Url
+LOGIN_REDIRECT_URL = 'accounts:edit_user'
+LOGIN_URL = 'login'
+AUTH_USER_MODEL = 'accounts.User'
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
+'accounts.backends.ModelBackend']
+
+#RolePermissions
+ROLEPERMISSIONS_REDIRECT_TO_LOGIN = True
+ROLEPERMISSIONS_MODULE = 'Treinamento.roles'

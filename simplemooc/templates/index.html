@@ -4,7 +4,13 @@
     <div class="jumbotron" align="center">
         <h1>Simplemooc</h1>
         <p>Entre com sua conta e aproveite para se cadastrar nos cursos disponíveis</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Entrar</a></p>
+        <p>
+            {% if not user.is_authenticated %}
+                <a class="btn btn-lg btn-success" href="{% url 'login' %}" role="button">Entrar</a>
+            {% else %}
+                <a class="btn btn-lg btn-success" href="{% url 'logout' %}" role="button">Sair</a>
+            {% endif %}
+        </p>
     </div>
 </div>
 {% endblock%}
