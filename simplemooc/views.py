@@ -2,19 +2,21 @@
 from django.shortcuts import render, get_object_or_404
 from django.http.response import HttpResponse
 from django.template import RequestContext, loader
+from django.views import generic
+from django.http import Http404
+from django.core.paginator import Paginator, EmptyPage
 from .models import Course, Category, Modules
 from .forms import category_form, module_form, teacher_form, course_form
 # Create your views here.
 
-def home(request):
-    context = {}
-    return render(request, 'index.html', context)
+class HomeView(generic.TemplateView):
+    template_name = 'index.html'
 
-def courses(request):
-    context = {}
-    courses = Course.objects.all()
-    context['courses'] = courses
-    return render(request, 'courses.html', context)
+class CourseView(generic.ListView):
+    queryset = Course.objects.filter(is_approved=True)
+    template_name = 'courses.html'
+    context_object_name = 'courses'
+    paginate_by = 1
 
 def detail(request, slug):
     context = {}

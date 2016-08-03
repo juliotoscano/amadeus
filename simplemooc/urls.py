@@ -3,8 +3,8 @@ from django.conf.urls import url, include
 from simplemooc import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
-    url(r'^courses$', views.courses, name='courses'),
+    url(r'^$', views.HomeView.as_view(), name='home'),
+    url(r'^courses$', views.CourseView.as_view(), name='courses'),
     url(r'^course/([\w_-]+)/$', views.detail, name='detail'),
     url(r'^course/category/([\w_-]+)/$', views.category, name='category'),
     url(r'^registercategory/$', views.post_create_category, name='createCategory'),

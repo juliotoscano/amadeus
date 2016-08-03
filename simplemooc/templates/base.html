@@ -40,15 +40,13 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if user.is_authenticated %}
-              <li><a href="{% url 'logout' %}">Sair</a></li>
+              <li><a href="{% url 'accounts:edit_user' %}">Editar</a></li>
               {% else %}
-              <li><a href="{% url 'login' %}">Entrar</a></li>
               {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
 
       <div class="container" style="margin-top: 3em;">
         <div class="starter-template">

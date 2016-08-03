@@ -38,10 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'rolepermissions',
     # libs
     'widget_tweaks',
+    'rolepermissions',
     #apps
     'accounts',
     'simplemooc',
@@ -140,7 +139,7 @@ MEDIA_ROOT = os.path.join(
                     )
 
 #Url
-LOGIN_REDIRECT_URL = 'accounts:edit_user'
+LOGIN_REDIRECT_URL = 'simplemooc:home'
 LOGIN_URL = 'login'
 AUTH_USER_MODEL = 'accounts.User'
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
