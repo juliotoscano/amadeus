@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
-
+from django.core.urlresolvers import reverse
 from django.db import models
 
 # Create your models here.
@@ -13,6 +13,9 @@ class Category(models.Model):
         verbose_name = 'categoria'
         verbose_name_plural = 'categorias'
 
+    def get_absolute_url(self):
+        return reverse('simplemooc:courses')
+
     def __str__(self):
         return self.name
 
@@ -23,6 +26,9 @@ class Teacher(models.Model):
     class Meta:
         verbose_name = 'Professor'
         verbose_name_plural = 'Professores'
+
+    def get_absolute_url(self):
+        return reverse('simplemooc:courses')
 
     def __str__(self):
         return self.name
@@ -40,6 +46,9 @@ class Modules(models.Model):
     class Meta:
         verbose_name = 'Modulo'
         verbose_name_plural = 'Modulos'
+
+    def get_absolute_url(self):
+        return reverse('simplemooc:courses')
 
     def __str__(self):
         return self.name
@@ -65,19 +74,16 @@ class Course(models.Model):
         )
     teacher = models.ForeignKey(
         Teacher,
-        on_delete=models.CASCADE,
         related_name='courses',
         verbose_name='professor'
         )
     category = models.ForeignKey(
         Category,
-        on_delete=models.CASCADE,
         related_name='courses',
         verbose_name = 'categoria'
         )
     modules = models.ForeignKey(
         Modules,
-        on_delete=models.CASCADE,
         related_name='courses',
         blank=True,
         default=True,
@@ -88,6 +94,9 @@ class Course(models.Model):
     class Meta:
         verbose_name = 'curso'
         verbose_name_plural = 'cursos'
+
+    def get_absolute_url(self):
+        return reverse('simplemooc:courses')
 
     def __str__(self):
         return self.name

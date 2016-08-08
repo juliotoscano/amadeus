@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Cadastre uma Categoria</h2>
+<h2>Cadastre-se</h2>
  {% if success %}
     <div class="alert alert-success">
         Mensagem enviada com sucesso
@@ -9,6 +9,6 @@
 <form action=""  method="POST" accept-charset="utf-8">
     {% csrf_token %}
     {{ form.as_p}}
-    <input type="submit" name="registercategory" value="Registrar">
+    <input type="submit" name="user_create_form" value="Registrar">
 </form>
 {% endblock %}
