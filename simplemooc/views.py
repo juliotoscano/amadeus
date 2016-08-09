@@ -8,6 +8,10 @@ from django.core.urlresolvers import reverse_lazy
 from django.core.paginator import Paginator, EmptyPage
 from .models import Course, Category, Modules, Teacher
 from .forms import category_form, module_form, teacher_form, course_form
+from django.core.mail import send_mail
+from django.conf import settings
+from .forms import contact_form
+
 # Create your views here.
 
 class HomeView(generic.TemplateView):
@@ -66,5 +70,17 @@ class DeleteCourse(generic.DeleteView):
     template_name = 'course_confirm_delete.html'
     success_url = reverse_lazy('simplemooc:courses')
 
-class ContactView(generic.TemplateView):
+class ContactView(generic.FormView):
    template_name = 'contact.html'
+   form_class = contact_form
+   success_url = reverse_lazy('simplemooc:contact')
+
+   def form_valid(self, form):
+    subject = '[simplemooc] {} entrou em contato'.format(form.cleaned_data['name'])
+    message = 'E-mail: {}\n{}'.format(
+        form.cleaned_data['email'], form.cleaned_data['message']
+    )
+    send_mail(
+        subject, message, settings.DEFAULT_FROM_EMAIL, [settings.CONTACT_EMAIL]
+    )
+    return super(ContactView, self).form_valid(form)

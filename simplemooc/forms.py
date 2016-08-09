@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
-
+from django import forms
 from django.forms import ModelForm
 from .models import Category, Modules, Teacher, Course
+
+class contact_form(forms.Form):
+    name = forms.CharField(label='nome')
+    email = forms.EmailField(label='E-mail')
+    message = forms.CharField(label='Mensagem', widget=forms.Textarea())
 
 class category_form(ModelForm):
     class Meta:

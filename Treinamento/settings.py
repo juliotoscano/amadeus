@@ -137,14 +137,18 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(
                     os.path.dirname(BASE_DIR), "media_cdn"
                     )
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'admin@admin.com'
+CONTACT_EMAIL = 'contact@admin.com'
 
-#Url
+# Url
 LOGIN_REDIRECT_URL = 'simplemooc:home'
 LOGIN_URL = 'login'
 AUTH_USER_MODEL = 'accounts.User'
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
 'accounts.backends.ModelBackend']
 
-#RolePermissions
+# RolePermissions
 ROLEPERMISSIONS_REDIRECT_TO_LOGIN = True
 ROLEPERMISSIONS_MODULE = 'Treinamento.roles'
