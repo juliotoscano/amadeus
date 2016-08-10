@@ -7,9 +7,9 @@ class Teacher(AbstractUserRole):
     }
 
 class Student(AbstractUserRole):
+
     available_permissions = {
-        'look_module':True,
-        'look_course':True
+        'create_course':False
     }
 
 

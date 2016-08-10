@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render, get_object_or_404
-from django.http.response import HttpResponse
-from django.template import RequestContext, loader
-from django.views import generic
-from django.http import Http404
+from django.views.generic import TemplateView, CreateView, ListView, FormView, DetailView, UpdateView, DeleteView
+from rolepermissions.mixins import HasRoleMixin
 from django.core.urlresolvers import reverse_lazy
-from django.core.paginator import Paginator, EmptyPage
 from .models import Course, Category, Modules, Teacher
 from .forms import category_form, module_form, teacher_form, course_form
 from django.core.mail import send_mail
@@ -14,10 +10,10 @@ from .forms import contact_form
 
 # Create your views here.
 
-class HomeView(generic.TemplateView):
+class HomeView(TemplateView):
     template_name = 'index.html'
 
-class CourseView(generic.ListView):
+class CourseView(ListView):
     template_name = 'courses.html'
     context_object_name = 'courses'
     paginate_by = 1
@@ -29,48 +25,49 @@ class CourseView(generic.ListView):
             queryset = queryset.filter(name__icontains=q)
         return queryset
 
-class ShowCourseView(generic.DetailView):
+class ShowCourseView(DetailView):
     model = Course
     context_object_name = 'course'
     template_name = 'course_detail.html'
 
-class ShowCategoryView(generic.DetailView):
+class ShowCategoryView(DetailView):
     model = Category
     context_object_name = 'category'
     template_name = 'category.html'
     #falta carregar os cursos para a variável courses.
 
-class CreateCategory(generic.CreateView):
+class CreateCategory(CreateView):
     model = Category
     form_class = category_form
     template_name = 'category_form.html'
 
-class CreateModule(generic.CreateView):
+class CreateModule(CreateView):
     model = Modules
     form_class = module_form
     template_name = 'module_form.html'
 
-class CreateTeacher(generic.CreateView):
+class CreateTeacher(CreateView):
     model = Teacher
     form_class = teacher_form
     template_name = 'teacher_form.html'
 
-class CreateCourse(generic.CreateView):
+class CreateCourse(CreateView, HasRoleMixin):
+    allowed_roles = ['Teacher']
     model = Course
     form_class = course_form
     template_name = 'course_form.html'
 
-class UpdateCourse(generic.UpdateView):
+class UpdateCourse(UpdateView):
     model = Course
     form_class = course_form
     template_name = 'course_form.html'
 
-class DeleteCourse(generic.DeleteView):
+class DeleteCourse(DeleteView):
     model = Course
     template_name = 'course_confirm_delete.html'
     success_url = reverse_lazy('simplemooc:courses')
 
-class ContactView(generic.FormView):
+class ContactView(FormView):
    template_name = 'contact.html'
    form_class = contact_form
    success_url = reverse_lazy('simplemooc:contact')
