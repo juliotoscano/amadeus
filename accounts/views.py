@@ -3,6 +3,7 @@ from django.views import generic
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from rolepermissions.shortcuts import assign_role
+from rolepermissions.verifications import has_permission
 from .forms import UserForm
 from .models import User
 
@@ -14,7 +15,7 @@ class CreateUser(generic.CreateView):
 
     def form_valid(self, form):
         form.save()
-        assign_role(form.instance, 'student')
+        assign_role(form.instance, 'teacher')
         context = self.get_context_data(form=form)
         context['success']= True
         return self.render_to_response(context)

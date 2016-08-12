@@ -26,7 +26,7 @@ SECRET_KEY = '6)lp!-=*i%w)cy&abn1*@!$$a)udu#41na5v*x(r_=$#88g*$l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -150,5 +150,4 @@ AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
 'accounts.backends.ModelBackend']
 
 # RolePermissions
-ROLEPERMISSIONS_REDIRECT_TO_LOGIN = True
 ROLEPERMISSIONS_MODULE = 'Treinamento.roles'

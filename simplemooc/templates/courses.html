@@ -2,13 +2,20 @@
 
 {% load pagination %}
 
+{% load permission_tags %}
+
 {% block content %}
 <h3>Criar:</h3>
 <p>
-<a class="btn btn-default btn-sm" href="{% url "simplemooc:createCourse" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Curso</a>
+{% if user|can:'create_module' %}
+    <a class="btn btn-default btn-sm" href="{% url "simplemooc:createCourse" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Curso</a>
+{% endif %}
 <a class="btn btn-default btn-sm" href="{% url "simplemooc:createCategory" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Categoria</a>
+
 <a class="btn btn-default btn-sm" href="{% url "simplemooc:createModule" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Módulo</a>
+
 <a class="btn btn-default btn-sm" href="{% url "simplemooc:createTeacher" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Professor</a>
+
 </p>
 <h2>Lista de Cursos</h2>
 {% for course in courses %}

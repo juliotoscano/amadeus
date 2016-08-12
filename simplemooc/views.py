@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
+
 from django.views.generic import TemplateView, CreateView, ListView, FormView, DetailView, UpdateView, DeleteView
-from rolepermissions.mixins import HasRoleMixin
 from django.core.urlresolvers import reverse_lazy
-from .models import Course, Category, Modules, Teacher
-from .forms import category_form, module_form, teacher_form, course_form
 from django.core.mail import send_mail
 from django.conf import settings
-from .forms import contact_form
+from rolepermissions.mixins import HasRoleMixin
+from .forms import category_form, module_form, teacher_form, course_form, contact_form
+from .models import Course, Category, Modules, Teacher
 
 # Create your views here.
-
 class HomeView(TemplateView):
     template_name = 'index.html'
 
@@ -52,7 +51,7 @@ class CreateTeacher(CreateView):
     template_name = 'teacher_form.html'
 
 class CreateCourse(CreateView, HasRoleMixin):
-    allowed_roles = ['Teacher']
+    allowed_roles = [Teacher]
     model = Course
     form_class = course_form
     template_name = 'course_form.html'
