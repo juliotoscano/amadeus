@@ -1,9 +1,11 @@
 # coding=utf-8
 from django.views import generic
+from django.http import HttpResponseForbidden
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from rolepermissions.shortcuts import assign_role
 from rolepermissions.verifications import has_permission
+from rolepermissions.mixins import HasRoleMixin
 from .forms import UserForm
 from .models import User
 
@@ -21,7 +23,7 @@ class CreateUser(generic.CreateView):
         return self.render_to_response(context)
 
 @login_required
-def edit_user(request):
+def Edit_user(request):
     form = UserForm(data=request.POST or None, instance=request.user)
     context = {}
 
@@ -30,3 +32,7 @@ def edit_user(request):
         context['success'] = True
     context['form'] = form
     return render(request, 'edit.html', context)
+
+class CoursesStudent(generic.TemplateView, HasRoleMixin):
+    allowed_roles = ['student']
+    template_name = "coursestudent.html"

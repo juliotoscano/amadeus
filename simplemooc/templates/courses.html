@@ -5,18 +5,18 @@
 {% load permission_tags %}
 
 {% block content %}
+{% if user|can:'create_module' %}
 <h3>Criar:</h3>
 <p>
-{% if user|can:'create_module' %}
     <a class="btn btn-default btn-sm" href="{% url "simplemooc:createCourse" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Curso</a>
-{% endif %}
-<a class="btn btn-default btn-sm" href="{% url "simplemooc:createCategory" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Categoria</a>
 
-<a class="btn btn-default btn-sm" href="{% url "simplemooc:createModule" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Módulo</a>
+    <a class="btn btn-default btn-sm" href="{% url "simplemooc:createCategory" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Categoria</a>
 
-<a class="btn btn-default btn-sm" href="{% url "simplemooc:createTeacher" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Professor</a>
+    <a class="btn btn-default btn-sm" href="{% url "simplemooc:createModule" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Módulo</a>
 
+    <a class="btn btn-default btn-sm" href="{% url "simplemooc:createTeacher" %}" role="button"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>Professor</a>
 </p>
+{% endif %}
 <h2>Lista de Cursos</h2>
 {% for course in courses %}
 <h3><a href="{% url 'simplemooc:detail' course.slug %}">{{ course }}</a></h3>
@@ -25,8 +25,19 @@
         <strong>Início: </strong>{{ course.begin_course }}<br>
         <strong>Fim: </strong>{{ course.end_course }}
 </p>
-<p><a href="{% url "simplemooc:updateCourse" course.slug %}">Editar</a> | <a href="{% url "simplemooc:deleteCourse" course.slug %}">Remover</a></p>
-
+<p>
+    {% if user|has_role:'student, systemAdmin'%}
+    <a href="#"">Inscrever-se</a> |
+    {% endif %}
+    <a href="{% url "simplemooc:updateCourse" course.slug %}">Editar</a> |
+    <a href="{% url "simplemooc:deleteCourse" course.slug %}">Remover</a>
+</p>
+{% if user|has_role:'teacher' %}
+<h4>Alunos Inscritos</h4>
+<ul>
+    <li>{{  }}</li>
+</ul>
+{% endif%}
 
 {% endfor %}
 

@@ -2,6 +2,7 @@
 
 from django.views.generic import TemplateView, CreateView, ListView, FormView, DetailView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.utils.translation import ugettext as _
 from django.core.mail import send_mail
 from django.conf import settings
 from rolepermissions.mixins import HasRoleMixin
@@ -18,7 +19,7 @@ class CourseView(ListView):
     paginate_by = 1
 
     def get_queryset(self):
-        queryset = Course.objects.filter(is_approved=True)
+        queryset = Course.objects.filter(user=self.request.user)
         q = self.request.GET.get('q', None)
         if q:
             queryset = queryset.filter(name__icontains=q)

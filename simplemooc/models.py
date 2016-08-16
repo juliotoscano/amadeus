@@ -3,11 +3,12 @@
 from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField('Nome', max_length=100)
-    slug = models.SlugField('Identificador', max_length=100)
+    name = models.CharField(_('Name'), max_length=100)
+    slug = models.SlugField(_('Identify'), max_length=100)
 
     class Meta:
         verbose_name = 'categoria'
@@ -100,4 +101,5 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
+
 

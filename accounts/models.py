@@ -3,12 +3,13 @@
 from __future__ import unicode_literals
 
 import re
-
+# from django.contrib.auth.models import User
 from django.db import models
+from simplemooc.models import Course
 from django.core import validators
 from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
-# Create your models here.
 
+# Create your models here.
 class User(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(
@@ -27,6 +28,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField('Equipe', default=True)
     is_active = models.BooleanField('Ativo', default=True)
     date_joined = models.DateTimeField('Data de entrada', auto_now_add=True)
+    subscription = models.ManyToManyField(Course, blank=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
@@ -45,3 +47,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return str(self).split(" ")[0]
+
+
+

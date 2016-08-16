@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-11 10:15-0300\n"
+"POT-Creation-Date: 2016-08-15 09:58-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: simplemooc/templates/base.html:37
+#: simplemooc/templates/base.html:33
 msgid "home"
-msgstr "Inicio"
+msgstr "início"
+
+#: simplemooc/templates/base.html:34
+msgid "courses"
+msgstr "cursos"
 
 #: simplemooc/templates/base.html:38
-msgid "courses"
-msgstr "Cursos"
-
-#: simplemooc/templates/base.html:42
 msgid "contact"
-msgstr "Contato"
+msgstr "contato"
 
-#: simplemooc/templates/base.html:51
+#: simplemooc/templates/base.html:47
 msgid "Edit"
-msgstr "Editar"
+msgstr "editar"
