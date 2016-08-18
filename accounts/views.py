@@ -1,13 +1,14 @@
 # coding=utf-8
 from django.views import generic
 from django.http import HttpResponseForbidden
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.contrib.auth.decorators import login_required
 from rolepermissions.shortcuts import assign_role
 from rolepermissions.verifications import has_permission
 from rolepermissions.mixins import HasRoleMixin
 from .forms import UserForm
-from .models import User
+from .models import User, Course
+from simplemooc import urls
 
 # Create your views here.
 class CreateUser(generic.CreateView):
@@ -36,3 +37,10 @@ def Edit_user(request):
 class CoursesStudent(generic.TemplateView, HasRoleMixin):
     allowed_roles = ['student']
     template_name = "coursestudent.html"
+
+def subscription(request, slug):
+    course = Course.objects.get(slug=slug)
+    request.user.subscription.add(course)
+    context ={}
+    context['success'] = True
+    return render(request, 'coursestudent.html', context)

@@ -1,4 +1,3 @@
-
 {% load static pagination i18n permission_tags %}
 
 <html>
@@ -44,6 +43,7 @@
           </form>
           <ul class="nav navbar-nav navbar-right">
               {% if user.is_authenticated %}
+              <li><a href="{% url 'accounts:edit_user' %}">{% trans ' + Subscription' %}</a></li>
               <li><a href="{% url 'accounts:edit_user' %}">{% trans 'Edit' %}</a></li>
               {% else %}
               {% endif %}

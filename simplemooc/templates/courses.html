@@ -27,7 +27,7 @@
 </p>
 <p>
     {% if user|has_role:'student, systemAdmin'%}
-    <a href="#"">Inscrever-se</a> |
+    <i>Inscrito</i> |
     {% endif %}
     <a href="{% url "simplemooc:updateCourse" course.slug %}">Editar</a> |
     <a href="{% url "simplemooc:deleteCourse" course.slug %}">Remover</a>
@@ -35,7 +35,7 @@
 {% if user|has_role:'teacher' %}
 <h4>Alunos Inscritos</h4>
 <ul>
-    <li>{{  }}</li>
+    <li></li>
 </ul>
 {% endif%}
 
@@ -43,4 +43,29 @@
 
 {% pagination request paginator page_obj %}
 
+<div class="col-md-4   ">
+{% for sub in subscription%}
+    <div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"> {{sub}}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-8 col-sm-6">
+                <p>{{ sub.description|linebreaks  }}</p>
+            </div>
+            <div class="col-xs-4 col-sm-6">
+                <p><a href="{% url "accounts:subscription" sub.slug %}"> + Inscreva-se</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+</div>
+{% if success %}
+    <div class="alert alert-success">
+        Mensagem enviada com sucesso
+    </div>
+{% endif %}
 {% endblock%}

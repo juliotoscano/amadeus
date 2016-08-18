@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.views.generic import TemplateView, CreateView, ListView, FormView, DetailView, UpdateView, DeleteView
+from django.views.generic.list import MultipleObjectMixin
 from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext as _
 from django.core.mail import send_mail
@@ -18,8 +19,38 @@ class CourseView(ListView):
     context_object_name = 'courses'
     paginate_by = 1
 
+    def get_context_data(self, **kwargs):
+        queryset = kwargs.pop('object_list', self.object_list)
+        page_size = self.get_paginate_by(queryset)
+        context_object_name = self.get_context_object_name(queryset)
+        if page_size:
+            paginator, page, queryset, is_paginated = self.paginate_queryset(queryset, page_size)
+            context = {
+                'paginator': paginator,
+                'page_obj': page,
+                'is_paginated': is_paginated,
+                'object_list': queryset
+            }
+        else:
+            context = {
+                'paginator': None,
+                'page_obj': None,
+                'is_paginated': False,
+                'object_list': queryset
+            }
+        if context_object_name is not None:
+            context[context_object_name] = queryset
+            context['subscription'] = Course.objects.all()
+        context.update(kwargs)
+        return super(MultipleObjectMixin, self).get_context_data(**context)
+
     def get_queryset(self):
-        queryset = Course.objects.filter(user=self.request.user)
+        u = self.request.user
+        if u.is_authenticated():
+            queryset = Course.objects.filter(user=self.request.user)
+        else:
+            queryset = Course.objects.all()
+
         q = self.request.GET.get('q', None)
         if q:
             queryset = queryset.filter(name__icontains=q)
